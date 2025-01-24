@@ -33,10 +33,10 @@ class _HomePageState extends State<HomePage> {
                 fontSize: 26)),
       ),
       body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: <Widget>[
           Padding(
-            padding: const EdgeInsets.only(left: 20, bottom: 10, right: 20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -45,14 +45,17 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[700])),
-                  Text('See more',
-                      style: TextStyle(
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                          decorationColor:
-                              Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary)),
+                  TextButton(
+                    child: Text('See more',
+                        style: TextStyle(
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                            decorationColor:
+                                Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary)),
+                    onPressed: () {},
+                  ),
                 ]),
           ),
           FutureBuilder<Object>(
@@ -60,7 +63,10 @@ class _HomePageState extends State<HomePage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(80),
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
                 if (snapshot.hasError) {
@@ -114,7 +120,6 @@ class _HomePageState extends State<HomePage> {
                   ),
                 );
               }),
-          SizedBox(height: 20),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Divider(
@@ -123,7 +128,7 @@ class _HomePageState extends State<HomePage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(20),
+            padding: const EdgeInsets.only(left: 20, right: 20),
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -132,14 +137,17 @@ class _HomePageState extends State<HomePage> {
                           fontSize: 26,
                           fontWeight: FontWeight.bold,
                           color: Colors.grey[700])),
-                  Text('See more',
-                      style: TextStyle(
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                          decorationColor:
-                              Theme.of(context).colorScheme.primary,
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary)),
+                  TextButton(
+                    child: Text('See more',
+                        style: TextStyle(
+                            fontSize: 16,
+                            decoration: TextDecoration.underline,
+                            decorationColor:
+                                Theme.of(context).colorScheme.primary,
+                            fontWeight: FontWeight.bold,
+                            color: Theme.of(context).colorScheme.primary)),
+                    onPressed: () {},
+                  ),
                 ]),
           ),
           FutureBuilder<Object>(
@@ -147,7 +155,10 @@ class _HomePageState extends State<HomePage> {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return Center(
-                    child: CircularProgressIndicator(),
+                    child: Padding(
+                      padding: const EdgeInsets.all(80),
+                      child: CircularProgressIndicator(),
+                    ),
                   );
                 }
                 if (snapshot.hasError) {
@@ -161,45 +172,65 @@ class _HomePageState extends State<HomePage> {
                   );
                 }
                 List<Category> categories = snapshot.data as List<Category>;
-                return ConstrainedBox(
-                  constraints: const BoxConstraints(maxHeight: 200),
-                  child: CarouselView(
-                    itemExtent: 250,
-                    shrinkExtent: 0,
-                    children:
-                        List<Widget>.generate(categories.length, (int index) {
-                      return Stack(
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(color: Colors.grey[800]),
-                            child: Opacity(
-                              opacity: 0.8,
-                              child: Image.network(categories[index].image,
-                                  fit: BoxFit.cover, height: 250),
+                return SizedBox(
+                    height: 300,
+                    child: ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: categories.length,
+                      itemBuilder: (context, index) {
+                        return Card(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(20),
+                          ),
+                          child: Container(
+                            width: 250,
+                            child: Column(
+                              children: [
+                                ClipRRect(
+                                  borderRadius: BorderRadius.vertical(
+                                    top: Radius.circular(20),
+                                  ), // Aplica o borderRadius apenas no topo
+                                  child: Image.network(
+                                    categories[index].image,
+                                    height: 180,
+                                    width: double.infinity,
+                                    fit: BoxFit.cover,
+                                  ),
+                                ),
+                                Align(
+                                  alignment: Alignment.centerLeft,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 10),
+                                    child: Text(
+                                      '${categories[index].name}',
+                                      style: TextStyle(fontSize: 18),
+                                      maxLines: 2,
+                                      overflow: TextOverflow.ellipsis,
+                                    ),
+                                  ),
+                                ),
+                                Spacer(),
+                                Padding(
+                                  padding: const EdgeInsets.only(
+                                      left: 10, right: 10, bottom: 10),
+                                  child: Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    children: [
+                                      Text('\$99.99', style: TextStyle(fontSize: 16)),
+                                      FilledButton(
+                                        child: Text('Add to Cart'),
+                                        onPressed: () {},
+                                      )
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
                           ),
-                          Align(
-                              alignment: Alignment.bottomLeft,
-                              child: Padding(
-                                  padding:
-                                      EdgeInsets.only(left: 20, bottom: 20),
-                                  child: Text('${categories[index].name}',
-                                      softWrap: false,
-                                      style: TextStyle(
-                                          color: Colors.white,
-                                          fontWeight: FontWeight.bold,
-                                          shadows: [
-                                            Shadow(
-                                                color: Colors.black54,
-                                                offset: Offset(2, 2),
-                                                blurRadius: 5)
-                                          ],
-                                          fontSize: 24)))),
-                        ],
-                      );
-                    }),
-                  ),
-                );
+                        );
+                      },
+                    ));
               }),
         ],
       ),

@@ -27,6 +27,7 @@ class _LoginPageState extends State<LoginPage> {
       decoration: InputDecoration(
         labelText: 'Login',
         labelStyle: TextStyle(fontSize: 20),
+        errorStyle: TextStyle(fontSize: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -53,6 +54,8 @@ class _LoginPageState extends State<LoginPage> {
           return 'Password must contain at least one lowercase letter';
         } else if (!RegExp(r'[0-9]').hasMatch(value)) {
           return 'Password must contain at least one number';
+        } else if (!RegExp(r'[!@#$%^&*(),.?":{}|<>]').hasMatch(value)) {
+          return 'Password must contain at least one special character';
         }
         return null;
       },
@@ -63,6 +66,8 @@ class _LoginPageState extends State<LoginPage> {
       decoration: InputDecoration(
         labelText: 'Password',
         labelStyle: TextStyle(fontSize: 20),
+        errorMaxLines: 2,
+        errorStyle: TextStyle(fontSize: 14),
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -92,6 +97,7 @@ class _LoginPageState extends State<LoginPage> {
       width: double.infinity,
       child: ElevatedButton(
         onPressed: () {
+          FocusScope.of(context).unfocus();
           if (formKey.currentState!.validate()) {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => HomePage()));

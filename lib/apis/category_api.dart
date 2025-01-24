@@ -4,7 +4,7 @@ class CategoryApi {
   static Future<List<Category>> getCategories() async {
     await Future.delayed(Duration(seconds: 1));
     return [
-      Category('Meats\n & Cold Cuts',
+      Category('Meats\n& Cold Cuts',
           'https://img.freepik.com/premium-photo/variety-frozen-meat-food-storage_875825-22858.jpg'),
       Category('Cereals',
           'https://img.freepik.com/premium-photo/assortment-cereals-displayed-grocery-store-shelf_1079150-289076.jpg'),
@@ -18,9 +18,7 @@ class CategoryApi {
           'https://img.freepik.com/free-photo/still-life-with-various-spices_23-2149444662.jpg'),
       Category('Dairy',
           'https://img.freepik.com/premium-photo/dairy-section-shelves-stocked-with-milk-yogurt-cheese_1198884-54948.jpg'),
-      Category('Fruits',
-          'https://img.freepik.com/premium-photo/fresh-fruits-vegetables-supermarket-shelves_464863-3706.jpg'),
-      Category('Vegetables',
+      Category('Fruits\n& Vegetables',
           'https://img.freepik.com/premium-photo/frozen-food-refrigerator-vegetables-freezer-shelves_641503-170245.jpg'),
       Category('Cleaning',
           'https://img.freepik.com/premium-psd/organized-cleaning-supplies-shelves_713655-35660.jpg'),
