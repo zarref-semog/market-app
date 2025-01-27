@@ -20,6 +20,43 @@ class _TemplateState extends State<Menu> {
         .push(MaterialPageRoute(builder: (context) => CartPage()));
   }
 
+  Widget _drawer() {
+    return Drawer(
+      backgroundColor: Theme.of(context).primaryColor,
+      child: Container(
+        padding: EdgeInsets.all(10),
+        child: Column(children: [
+          Align(
+              alignment: Alignment.centerRight,
+              child: IconButton(
+                  icon: Icon(Icons.clear, color: Colors.white, size: 30),
+                  onPressed: () => Navigator.of(context).pop())),
+          ListTile(
+              leading: Icon(Icons.category, color: Colors.white, size: 30),
+              title: Text("Manage Categories",
+                  style: TextStyle(fontSize: 20, color: Colors.white))),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Divider(color: Colors.white),
+          ),
+          ListTile(
+              leading: Icon(Icons.now_widgets, color: Colors.white, size: 30),
+              title: Text("Manage Products",
+                  style: TextStyle(fontSize: 20, color: Colors.white))),
+          Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Divider(color: Colors.white),
+          ),
+          ListTile(
+              leading:
+                  Icon(Icons.manage_accounts, color: Colors.white, size: 30),
+              title: Text("Manage Users",
+                  style: TextStyle(fontSize: 20, color: Colors.white))),
+        ]),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final _kTabPages = <Widget>[
@@ -62,29 +99,7 @@ class _TemplateState extends State<Menu> {
                 fontWeight: FontWeight.bold,
                 fontSize: 26)),
       ),
-      drawer: Drawer(
-        backgroundColor: Theme.of(context).primaryColor,
-        child: ListView(children: [
-          Align(
-              alignment: Alignment.centerRight,
-              child: IconButton(
-                  icon: Icon(Icons.clear, color: Colors.white, size: 30),
-                  onPressed: () => Navigator.of(context).pop())),
-          ListTile(
-              leading: Icon(Icons.category, color: Colors.white, size: 30),
-              title: Text("Manage Categories",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
-          ListTile(
-              leading: Icon(Icons.now_widgets, color: Colors.white, size: 30),
-              title: Text("Manage Products",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
-          ListTile(
-              leading:
-                  Icon(Icons.manage_accounts, color: Colors.white, size: 30),
-              title: Text("Manage Users",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
-        ]),
-      ),
+      drawer: _drawer(),
       body: _kTabPages[_currentTabIndex],
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: _currentTabIndex,
