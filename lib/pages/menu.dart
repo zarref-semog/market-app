@@ -87,9 +87,19 @@ class _TemplateState extends State<Menu> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          IconButton(
-              icon: Icon(Icons.shopping_cart, size: 30),
-              onPressed: () => _showCart())
+          Stack(alignment: Alignment.topLeft, children: [
+            IconButton(
+                icon: Icon(Icons.shopping_cart, size: 30),
+                onPressed: () => _showCart()),
+            Container(
+                width: 25,
+                height: 25,
+                decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(100)),
+                child: Center(
+                    child: Text("99", style: TextStyle(color: Colors.white)))),
+          ])
         ],
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
