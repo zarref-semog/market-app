@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter/widgets.dart';
-import 'package:store_app_1/pages/home_page.dart';
+import 'package:store_app_1/pages/menu.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -100,7 +100,7 @@ class _LoginPageState extends State<LoginPage> {
           FocusScope.of(context).unfocus();
           if (formKey.currentState!.validate()) {
             Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => HomePage()));
+                MaterialPageRoute(builder: (context) => Menu()));
           }
         },
         child: Text(
