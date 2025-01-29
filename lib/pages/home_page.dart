@@ -4,9 +4,10 @@ import 'package:store_app_1/apis/category_api.dart';
 import '../models/category.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
-
   final String title = "MarketApp";
+  final changeTabIndex;
+
+  HomePage({super.key, this.changeTabIndex});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -43,7 +44,9 @@ class _HomePageState extends State<HomePage> {
                       decorationColor: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary)),
-              onPressed: () {},
+              onPressed: () {
+                widget.changeTabIndex(2);
+              },
             ),
           ]),
         ),
@@ -131,7 +134,9 @@ class _HomePageState extends State<HomePage> {
                       decorationColor: Theme.of(context).colorScheme.primary,
                       fontWeight: FontWeight.bold,
                       color: Theme.of(context).colorScheme.primary)),
-              onPressed: () {},
+              onPressed: () {
+                widget.changeTabIndex(1);
+              },
             ),
           ]),
         ),

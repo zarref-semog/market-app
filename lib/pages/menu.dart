@@ -9,11 +9,15 @@ class Menu extends StatefulWidget {
   const Menu({super.key});
 
   @override
-  State<Menu> createState() => _TemplateState();
+  State<Menu> createState() => _MenuState();
 }
 
-class _TemplateState extends State<Menu> {
+class _MenuState extends State<Menu> {
   int _currentTabIndex = 0;
+
+  changeTabIndex(value) {
+    setState(() => _currentTabIndex = value);
+  }
 
   void _showCart() {
     Navigator.of(context)
@@ -60,9 +64,9 @@ class _TemplateState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     final _kTabPages = <Widget>[
-      HomePage(),
-      CategoriesPage(),
+      HomePage(changeTabIndex: changeTabIndex,),
       OnSalePage(),
+      CategoriesPage(),
       Profile()
     ];
     final _kBottomNavigationBarItems = <BottomNavigationBarItem>[
@@ -71,12 +75,12 @@ class _TemplateState extends State<Menu> {
         label: 'Home',
       ),
       BottomNavigationBarItem(
-        icon: Icon(Icons.category),
-        label: 'Categories',
-      ),
-      BottomNavigationBarItem(
         icon: Icon(Icons.star_rounded),
         label: 'On Sale',
+      ),
+      BottomNavigationBarItem(
+        icon: Icon(Icons.category),
+        label: 'Categories',
       ),
       BottomNavigationBarItem(
         icon: Icon(Icons.account_circle),
