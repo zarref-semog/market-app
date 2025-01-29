@@ -91,19 +91,20 @@ class _MenuState extends State<Menu> {
     return Scaffold(
       appBar: AppBar(
         actions: [
-          Stack(alignment: Alignment.topLeft, children: [
-            IconButton(
-                icon: Icon(Icons.shopping_cart, size: 30),
-                onPressed: () => _showCart()),
-            Container(
-                width: 25,
-                height: 25,
-                decoration: BoxDecoration(
-                    color: Colors.red,
-                    borderRadius: BorderRadius.circular(100)),
-                child: Center(
-                    child: Text("99", style: TextStyle(color: Colors.white)))),
-          ])
+          GestureDetector(
+            onTap: _showCart,
+            child: Stack(alignment: Alignment.centerLeft, children: [
+              Icon(Icons.shopping_cart, size: 40),
+              Container(
+                  width: 25,
+                  height: 25,
+                  decoration: BoxDecoration(
+                      color: Colors.red,
+                      borderRadius: BorderRadius.circular(100)),
+                  child: Center(
+                      child: Text("99", style: TextStyle(color: Colors.white)))),
+            ]),
+          )
         ],
         iconTheme: IconThemeData(color: Colors.white),
         backgroundColor: Theme.of(context).colorScheme.primary,
