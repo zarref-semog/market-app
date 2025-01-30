@@ -18,6 +18,64 @@ class _CartPageState extends State<CartPage> {
     items = CategoryApi.getCategories();
   }
 
+  void _cartItemDialog(BuildContext context, cartItem) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text("Details",
+              style: TextStyle(
+                  fontWeight: FontWeight.bold, color: Colors.black54)),
+          content: SingleChildScrollView(
+            child: Column(
+              spacing: 5,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize
+                  .min, // Permite que o diálogo ajuste sua altura dinamicamente
+              children: [
+                InteractiveViewer(child: Image.network(cartItem.image)),
+                SizedBox(height: 10),
+                Text("Description:",
+                    style: TextStyle(
+                        fontSize: 18,
+                        color:
+                            Colors.black54)), // Espaçamento entre os elementos
+                Text(
+                  "${cartItem.name}",
+                  style: TextStyle(fontSize: 18),
+                ),
+                Text("Price:",
+                    style: TextStyle(fontSize: 18, color: Colors.black54)),
+                Text("\$99.99", style: TextStyle(fontSize: 18)),
+              ],
+            ),
+          ),
+          actions: <Widget>[
+            TextButton(
+              child: SizedBox(
+                width: 80,
+                child: Row(
+                    spacing: 5,
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: [
+                      Icon(Icons.keyboard_return,
+                          size: 30, color: Colors.black54),
+                      Text(
+                        "Back",
+                        style: TextStyle(color: Colors.black54, fontSize: 18),
+                      ),
+                    ]),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,19 +100,20 @@ class _CartPageState extends State<CartPage> {
 
   Widget _body(context) {
     return Column(
+      spacing: 5,
       children: [
         Padding(
           padding: EdgeInsets.only(left: 20, right: 20, top: 10),
           child: Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
+              spacing: 5,
               children: [
                 Text("My Cart",
                     style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.bold,
                         color: Colors.grey[700])),
-                SizedBox(height: 10),
                 TextField(
                   style: TextStyle(fontSize: 18),
                   decoration: InputDecoration(
@@ -67,7 +126,6 @@ class _CartPageState extends State<CartPage> {
                         EdgeInsets.symmetric(vertical: 15, horizontal: 15),
                   ),
                 ),
-                SizedBox(height: 10),
                 Text("Results",
                     style: TextStyle(
                         fontSize: 24,
@@ -103,45 +161,52 @@ class _CartPageState extends State<CartPage> {
                     itemCount: items.length,
                     itemBuilder: (context, index) {
                       return ListTile(
-                        leading: SizedBox(
-                          child: Image.network(items[index].image,
-                              fit: BoxFit.cover, width: 100, height: 80),
-                        ),
-                        title: Text(
-                          '${items[index].name}',
-                          style: TextStyle(
-                              fontSize: 18, overflow: TextOverflow.ellipsis),
-                          maxLines: 2,
-                        ),
-                        subtitle:
-                            Text("\$99.99", style: TextStyle(fontSize: 16)),
-                        trailing: SizedBox(
-                          width: 100,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              GestureDetector(
-                                  child: Container(
-                                    child: Icon(Icons.add, color: Colors.white),
-                                    decoration: BoxDecoration(
-                                        color: Colors.green,
-                                        shape: BoxShape.circle),
-                                  ),
-                                  onTap: () {}),
-                              Text("${99}", style: TextStyle(fontSize: 16)),
-                              GestureDetector(
-                                  child: Container(
-                                    child:
-                                        Icon(Icons.remove, color: Colors.white),
-                                    decoration: BoxDecoration(
-                                        color: Colors.red,
-                                        shape: BoxShape.circle),
-                                  ),
-                                  onTap: () {}),
-                            ],
+                          leading: SizedBox(
+                            child: Image.network(items[index].image,
+                                fit: BoxFit.cover, width: 100, height: 80),
                           ),
-                        ),
-                      );
+                          title: Text(
+                            '${items[index].name}',
+                            style: TextStyle(
+                                fontSize: 18, overflow: TextOverflow.ellipsis),
+                            maxLines: 2,
+                          ),
+                          subtitle:
+                              Text("\$99.99", style: TextStyle(fontSize: 16)),
+                          trailing: SizedBox(
+                            width: 100,
+                            child: Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                GestureDetector(
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      child:
+                                          Icon(Icons.add, color: Colors.white),
+                                      decoration: BoxDecoration(
+                                          color: Colors.green,
+                                          shape: BoxShape.circle),
+                                    ),
+                                    onTap: () {}),
+                                Text("${99}", style: TextStyle(fontSize: 16)),
+                                GestureDetector(
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      child: Icon(Icons.remove,
+                                          color: Colors.white),
+                                      decoration: BoxDecoration(
+                                          color: Colors.red,
+                                          shape: BoxShape.circle),
+                                    ),
+                                    onTap: () {}),
+                              ],
+                            ),
+                          ),
+                          onTap: () {
+                            _cartItemDialog(context, items[index]);
+                          });
                     }),
               );
             })

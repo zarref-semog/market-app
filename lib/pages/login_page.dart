@@ -144,10 +144,9 @@ class _LoginPageState extends State<LoginPage> {
           child: Column(
             children: <Widget>[
               Container(
-                  margin: EdgeInsets.only(top: 40),
+                  margin: EdgeInsets.symmetric(vertical: 40),
                   width: 300,
                   child: Image.asset('images/MarketApp.png')),
-              SizedBox(height: 40),
               Expanded(
                 child: Container(
                   padding: EdgeInsets.all(20),
@@ -158,6 +157,7 @@ class _LoginPageState extends State<LoginPage> {
                           topRight: Radius.circular(25))),
                   child: SingleChildScrollView(
                     child: Column(
+                      spacing: 40,
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                         Text("Log In",
@@ -165,13 +165,9 @@ class _LoginPageState extends State<LoginPage> {
                                 fontSize: 26,
                                 color: Colors.black54,
                                 fontWeight: FontWeight.bold)),
-                        SizedBox(height: 20),
                         emailTextFormField(context),
-                        SizedBox(height: 40),
                         passwordTextFormField(context),
-                        SizedBox(height: 40),
                         enterButton(context),
-                        SizedBox(height: 40),
                       ],
                     ),
                   ),

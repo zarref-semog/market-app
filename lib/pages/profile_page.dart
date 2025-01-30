@@ -215,38 +215,43 @@ class _ProfileState extends State<Profile> {
   Widget build(BuildContext context) {
     return Form(
       key: formKey,
-      child: ListView(
-        padding: EdgeInsets.all(20),
+      child: Column(
         children: [
-          Icon(Icons.account_circle, size: 100, color: Colors.grey),
-          SizedBox(height: 20),
-          nameTextFormField(context),
-          SizedBox(height: 20),
-          surnameTextFormField(context),
-          SizedBox(height: 20),
-          emailTextFormField(context),
-          SizedBox(height: 20),
-          changePassword
-              ? Column(
-                  children: [
-                    passwordTextFormField(context),
-                    SizedBox(height: 20),
-                    confirmPasswordTextFormField(context),
-                  ],
-                )
-              : TextButton(
-                  child: Text("Change Password?",
-                      style: TextStyle(
-                          fontSize: 16,
-                          decoration: TextDecoration.underline,
-                          decorationColor: Theme.of(context).primaryColor)),
-                  onPressed: () {
-                    setState(() => changePassword = !changePassword);
-                  },
-                ),
-          SizedBox(height: 20),
-          saveButton(context),
-          SizedBox(height: 20),
+          Expanded(
+            child: ListView(
+              padding: EdgeInsets.all(20),
+              children: [
+                Icon(Icons.account_circle, size: 100, color: Colors.grey),
+                SizedBox(height: 20),
+                nameTextFormField(context),
+                SizedBox(height: 20),
+                surnameTextFormField(context),
+                SizedBox(height: 20),
+                emailTextFormField(context),
+                SizedBox(height: 20),
+                changePassword
+                    ? Column(
+                        children: [
+                          passwordTextFormField(context),
+                          SizedBox(height: 20),
+                          confirmPasswordTextFormField(context),
+                        ],
+                      )
+                    : TextButton(
+                        child: Text("Change Password?",
+                            style: TextStyle(
+                                fontSize: 16,
+                                decoration: TextDecoration.underline,
+                                decorationColor: Theme.of(context).primaryColor)),
+                        onPressed: () {
+                          setState(() => changePassword = !changePassword);
+                        },
+                      ),
+                SizedBox(height: 20),
+                saveButton(context),
+              ],
+            ),
+          ),
           TextButton(
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
