@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:store_app_1/pages/cart_page.dart';
 import 'package:store_app_1/pages/categories_page.dart';
 import 'package:store_app_1/pages/home_page.dart';
+import 'package:store_app_1/pages/manage_categories_page.dart';
+import 'package:store_app_1/pages/manage_products_page.dart';
+import 'package:store_app_1/pages/manage_users_page.dart';
 import 'package:store_app_1/pages/on_sale_page.dart';
 import 'package:store_app_1/pages/profile_page.dart';
 
@@ -37,16 +40,28 @@ class _MenuState extends State<Menu> {
                   onPressed: () => Navigator.of(context).pop())),
           ListTile(
               leading: Icon(Icons.category, color: Colors.white, size: 30),
-              title: Text("Manage Categories",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
+              title: Text(
+                "Manage Categories",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ManageCategoriesPage()));
+              }),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Divider(color: Colors.white),
           ),
           ListTile(
               leading: Icon(Icons.now_widgets, color: Colors.white, size: 30),
-              title: Text("Manage Products",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
+              title: Text(
+                "Manage Products",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ManageProductsPage()));
+              }),
           Padding(
             padding: const EdgeInsets.only(left: 20, right: 20),
             child: Divider(color: Colors.white),
@@ -54,8 +69,14 @@ class _MenuState extends State<Menu> {
           ListTile(
               leading:
                   Icon(Icons.manage_accounts, color: Colors.white, size: 30),
-              title: Text("Manage Users",
-                  style: TextStyle(fontSize: 20, color: Colors.white))),
+              title: Text(
+                "Manage Users",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              onTap: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => ManageUsersPage()));
+              }),
         ]),
       ),
     );
@@ -64,7 +85,9 @@ class _MenuState extends State<Menu> {
   @override
   Widget build(BuildContext context) {
     final _kTabPages = <Widget>[
-      HomePage(changeTabIndex: changeTabIndex,),
+      HomePage(
+        changeTabIndex: changeTabIndex,
+      ),
       OnSalePage(),
       CategoriesPage(),
       Profile()
@@ -102,7 +125,8 @@ class _MenuState extends State<Menu> {
                       color: Colors.red,
                       borderRadius: BorderRadius.circular(100)),
                   child: Center(
-                      child: Text("99", style: TextStyle(color: Colors.white)))),
+                      child:
+                          Text("99", style: TextStyle(color: Colors.white)))),
             ]),
           )
         ],

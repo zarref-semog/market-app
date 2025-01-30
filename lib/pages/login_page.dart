@@ -173,17 +173,16 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ),
               ),
-              Container(
-                color: Colors.white,
-                width: double.infinity,
-                child: Text("v1.0.0",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.grey, fontWeight: FontWeight.bold)),
-              )
             ],
           ),
         ),
+      ),
+      bottomSheet: Container(
+        color: Colors.white,
+        width: double.infinity,
+        child: Text("1.0.0",
+            textAlign: TextAlign.center,
+            style: TextStyle(color: Colors.grey, fontWeight: FontWeight.bold)),
       ),
     );
   }
