@@ -172,16 +172,19 @@ class _LoginPageState extends State<LoginPage> {
                         SizedBox(height: 40),
                         enterButton(context),
                         SizedBox(height: 40),
-                        Text("v.1.0.0",
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.grey,
-                                fontWeight: FontWeight.bold))
                       ],
                     ),
                   ),
                 ),
               ),
+              Container(
+                color: Colors.white,
+                width: double.infinity,
+                child: Text("v1.0.0",
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: Colors.grey, fontWeight: FontWeight.bold)),
+              )
             ],
           ),
         ),
